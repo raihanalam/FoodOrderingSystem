@@ -20,43 +20,28 @@
       /* Ensure the navbar is above other elements */
     }
 
-    .carousel-item {
-      height: 90vh;
-      /* Set height to 100% of the viewport height */
-      position: relative;
-    }
-
-    .carousel-item img {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-    }
-
-    .carousel-item .container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .custom-card {
+      height: auto;
+      width: 600px auto;
+      background: linear-gradient(to bottom, rgb(248, 179, 167), white);
+      border-radius: 10px;
       text-align: center;
-      color: #fff;
-      /* Set text color to white or adjust as needed */
     }
 
-    .carousel-item h1 {
-      font-size: 2.5rem;
-      /* Adjust the font size as needed */
-      margin-bottom: 20px;
+    .find-kitchen-btn {
+      background-color: tomato;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      /* margin-left: 10px; */
+      cursor: pointer;
     }
 
-    .carousel-item p {
-      font-size: 1.25rem;
-      /* Adjust the font size as needed */
-      margin-bottom: 20px;
-    }
-
-    .carousel-item .btn-primary {
-      font-size: 1.5rem;
-      /* Adjust the font size as needed */
+    /* Optional: Add additional CSS to center the section horizontally */
+    section {
+      display: flex;
+      justify-content: center;
     }
   </style>
 </head>
@@ -64,33 +49,31 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light p-4 fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">FoodKitch</a>
+    <div class="container flex justify-content-between">
+      <a class="navbar-brand" href="#"><img src="{% static 'icons/Logo.png' %}" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse ml-5" id="navbarNav">
-        <div class="d-flex" style="margin-left:100px">
+        <div class="d-flex " style="margin-left: 32%;">
           <!-- Add signup and signin buttons -->
-          <a class="btn btn-success" href="#signin">Sign In</a>
-          <a class="btn btn-primary" style="margin-left: 20px;" href="#signup">Sign Up</a>
-          <!-- End of signup and signin buttons -->
+          <div class="p-3"
+            style="background-color: rgb(244, 205, 198); border-bottom-left-radius: 10px; border-top-right-radius: 10px;">
+            <span><img src="{% static 'icons/kitchen.png' %}" style="height: 20px; width: 20px; margin-right: 5px;;"
+                alt="">Create Your Kitchen</span>
+          </div>
         </div>
         <ul class="navbar-nav ms-auto">
+
           <li class="nav-item">
-            <a class="nav-link active" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#restaurants">Kitchens</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#categories">Meals</a>
+            <a class="nav-link" href="#categories"><i class="mr-2 fa-solid fa-user"
+                style="margin-right: 5px;"></i>Login/Signup</a>
           </li>
           <li class="nav-item">
             <span class="badge bg-danger rounded-pill" style="position: absolute; float: right;"
               id="cart-count">0</span>
-            <a class="nav-link" href="#cart"><i class="fa-solid fa-cart-plus"></i></a>
+            <a class="nav-link" href="#cart"><i class="fa-solid fa-cart-shopping"></i></a>
           </li>
 
         </ul>
@@ -98,91 +81,36 @@
     </div>
   </nav>
 
-
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{% static 'images/healthy-homemade-meal.jpg'%}" class="d-block w-100 hero-cover" alt="...">
-
-        <div class="container-fluid hero hero-cover hero-image w-100" id="hero">
-          <div class="container hero-content">
-            <h1 class="display-4">Order Delicious Food Today!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet
-              dolore
-              magna aliqua. Ut enim ad minim venenatis volutpat.</p>
-            <a href="#restaurants" class="btn btn-primary">Explore Kitchens</a>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="carousel-item active">
-        <img src="{% static 'images/healthy-homemade-meal.jpg'%}" class="d-block w-100" alt="...">
-        <div class="container">
-          <h1 class="display-4">Order Delicious Food Today!</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim venenatis volutpat.</p>
-          <a href="#restaurants" class="btn btn-primary">Explore Kitchens</a>
-        </div>
-      </div> -->
-      <div class="carousel-item">
-        <img src="{% static 'images/mockup-cooking-blog.jpg' %}" class="d-block w-100" alt="...">
-        <div class="container-fluid hero hero-cover hero-image" id="hero">
-          <div class="container hero-content">
-            <h1 class="display-4">Order Delicious Food Today!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet
-              dolore
-              magna aliqua. Ut enim ad minim venenatis volutpat.</p>
-            <a href="#restaurants" class="btn btn-primary">Explore Kitchens</a>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'images/side-view-man-making.jpg'%}" class="d-block w-100" alt="...">
-        <div class="container-fluid hero hero-cover hero-image" id="hero">
-          <div class="container hero-content">
-            <h1 class="display-4">Order Delicious Food Today!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet
-              dolore
-              magna aliqua. Ut enim ad minim venenatis volutpat.</p>
-            <a href="#restaurants" class="btn btn-primary">Explore Kitchens</a>
-          </div>
+  <section class="mt-5 p-5 w-full">
+    <div class="w-full flex justify-content-center align-items-center">
+      <div class="d-flex flex-column justify-content-center align-items-center p-5 custom-card">
+        <h1>Missing Home Made <span style="color: tomato;">Food</span>?</h1>
+        <h2>Homecooked Meals & Delicacies<br>prepared by verified homechefs near you.</h2>
+        <div class="d-flex">
+          <input type="text" placeholder="Enter your location">
+          <button class="find-kitchen-btn">Find Kitchen</button>
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
+  </section>
 
 
   <section id="categories" class="container my-5">
-    <h3 class="display-6 text-left">Browse by Menus</h2>
-      <ul class="list-group list-group-flush">
-        <!-- Category items will be dynamically added here -->
-      </ul>
-      <button type="button" class="btn btn-light">Mixed</button>
-      <button type="button" class="btn btn-danger">Breakfast</button>
-      <button type="button" class="btn btn-warning">Lunch</button>
-      <button type="button" class="btn btn-info">Dinner</button>
-      <button type="button" class="btn btn-secondary">Desert</button>
-      <button type="button" class="btn btn-dark">Street Food</button>
+    <div>
+      <h3 class="text-center">Browse your regular food habit</h2>
+      <div class="w-80 d-flex justify-content-around">
+         <!-- Category items will be dynamically added here -->
+         <button type="button" class="btn bt">Mixed</button>
+         <button type="button" class="btn ">Breakfast</button>
+         <button type="button" class="btn ">Lunch</button>
+         <button type="button" class="btn ">Dinner</button>
+         <button type="button" class="btn ">Desert</button>
+         <button type="button" class="btn ">Street Food</button>
+      </div>
+    </div>
+
   </section>
-  <section id="cart" class="container my-5">
+  <!-- <section id="cart" class="container my-5">
     <div class="card" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
@@ -193,13 +121,12 @@
         <a href="#" class="btn btn-primary">Order Now</a>
       </div>
     </div>
-  </section>
+  </section> -->
 
-
+  <!-- 
   <section id="restaurants" class="container my-5">
     <h2 class="display-6 text-left">Popular Kitchens</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      <!-- Restaurant cards will be dynamically added here -->
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4">
@@ -215,7 +142,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Bootstrap JS Bundle (Bootstrap JS and Popper.js) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
