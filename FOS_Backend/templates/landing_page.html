@@ -1,289 +1,250 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block css_block %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Delivery App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    body {
-      margin-top: 56px;
-      /* Adjust the top margin based on your navbar height */
-    }
+<style>
+  .cat-btn {
+    color: white;
+    background-color: ;
+  }
 
-    nav {
-      z-index: 1000;
-      /* Ensure the navbar is above other elements */
-    }
+  .custom-card {
+    height: auto;
+    width: 600px auto;
+    background: linear-gradient(to bottom, rgb(252, 219, 213), white);
+    border-radius: 10px;
+    text-align: center;
+  }
 
-    .cat-btn {
-      color: white;
-      background-color: ;
-    }
+  .find-kitchen-btn {
+    background-color: rgb(255, 117, 93);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    /* margin-left: 10px; */
+    cursor: pointer;
+  }
+  .find-kitchen-field{
+    border: .5px solid rgb(246, 127, 106);
+    padding: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
 
-    .custom-card {
-      height: auto;
-      width: 600px auto;
-      background: linear-gradient(to bottom, rgb(252, 219, 213), white);
-      border-radius: 10px;
-      text-align: center;
-    }
+  /* Optional: Add additional CSS to center the section horizontally */
+  .banner {
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
 
-    .find-kitchen-btn {
-      background-color: rgb(255, 117, 93);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
+  }
 
-    /* Optional: Add additional CSS to center the section horizontally */
-    .banner {
-      display: flex;
-      justify-content: center;
-      /* flex-direction: column; */
+  .cat-btn {
+    color: rgb(110, 105, 105);
+    border: 1px solid rgb(255, 195, 185);
+    padding: 10px 25px;
+    margin-left: 10px;
+  }
 
-    }
+  .cat-btn:hover {
+    background-color: rgb(249, 201, 194);
 
-    .cat-btn {
-      color: rgb(110, 105, 105);
-      border: 1px solid rgb(255, 195, 185);
-      padding: 10px 25px;
-      margin-left: 10px;
-    }
+  }
 
-    .cat-btn:hover {
-      background-color: rgb(249, 201, 194);
+  .menu {
+    margin-bottom: 20px;
+  }
 
-    }
-    .menu{
-      margin-bottom: 20px;
-    }
-    .menu h4 {
-      margin-top: 20px;
-      position: absolute;
-      background-color: rgba(0, 0, 0, 0.601);
-      padding: 10px 40px;
-      color: white;
-    }
-  </style>
-</head>
+  .menu h4 {
+    margin-top: 20px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.601);
+    padding: 10px 40px;
+    color: white;
+  }
+</style>
+</style>
 
-<body>
+{% endblock %}
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light p-4 fixed-top">
-    <div class="container flex justify-content-between">
-      <a class="navbar-brand" href="#"><img src="{% static 'icons/Logo.png' %}" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse ml-5" id="navbarNav">
-        <div class="d-flex " style="margin-left: 32%;">
-          <!-- Add signup and signin buttons -->
-          <div class="p-3"
-            style="background-color: rgb(244, 205, 198); border-bottom-left-radius: 10px; border-top-right-radius: 10px;">
-            <span><img src="{% static 'icons/kitchen.png' %}" style="height: 20px; width: 20px; margin-right: 5px;;"
-                alt="">Create Your Kitchen</span>
-          </div>
-        </div>
-        <ul class="navbar-nav ms-auto">
-
-          <li class="nav-item">
-            <a class="nav-link" href="#categories"><i class="mr-2 fa-solid fa-user"
-                style="margin-right: 5px;font-size: 20px; color: #E32938;"></i>Login/Signup</a>
-          </li>
-          <li class="nav-item">
-            <span class="badge bg-danger rounded-pill" style="position: absolute; float: right;"
-              id="cart-count">0</span>
-            <a class="nav-link" href="#cart"><i class="fa-solid fa-cart-shopping"
-                style="font-size: 20px; color: #E32938;"></i></a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <section class="p-5 w-full banner" style="margin-top: 150px;">
-    <div class="w-full flex justify-content-center align-items-center">
-      <div class="d-flex flex-column justify-content-center align-items-center p-5 custom-card">
-        <h1 style="color: #455A64;">Missing Home Made <span style="color: tomato;">Food</span>?</h1>
-        <h2 class="mt-2" style="color: #575A5B;">Homecooked Meals & Delicacies<br>prepared by <img
-            src="{% static 'icons/verified.png'%}" alt=""><span style="color: #00A86B;">verified</span> homechefs near
-          you.</h2>
-        <div class="d-flex mt-3">
-          <!-- <select class="form-select" aria-label="Select City">
+{% block body_block %}
+<section class="p-5 w-full banner" style="margin-top: 150px;">
+  <div class="w-full flex justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center align-items-center p-5 custom-card">
+      <h1 style="color: #455A64;">Missing Home Made <span style="color: tomato;">Food</span>?</h1>
+      <h2 class="mt-2" style="color: #575A5B;">Homecooked Meals & Delicacies<br>prepared by <img
+          src="{% static 'icons/verified.png'%}" alt=""><span style="color: #00A86B;">verified</span> homechefs near
+        you.</h2>
+      <div class="d-flex mt-3">
+        <!-- <select class="form-select" aria-label="Select City">
             <option selected>Select City</option>
             <option value="1">Dhaka</option>
             <option value="2">Chittagong</option>
           </select> -->
-          <input type="text" class="form-group" placeholder="Enter your location">
-          <button class="find-kitchen-btn">Find Kitchen</button>
-        </div>
+        <input type="text" class="find-kitchen-field" placeholder="Enter your location">
+        <button class="find-kitchen-btn">Find Kitchen</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <section id="categories" class="container my-5">
-    <div>
-      <h3 class="text-center mb-4">Browse your regular food habit</h2>
-        <div class="w-80 d-flex justify-content-center align-items-center">
-          <!-- Category items will be dynamically added here -->
-          <button type="button" class="btn cat-btn">Mixed</button>
-          <button type="button" class="btn cat-btn">Breakfast</button>
-          <button type="button" class="btn cat-btn">Lunch</button>
-          <button type="button" class="btn cat-btn">Dinner</button>
-          <button type="button" class="btn cat-btn">Desert</button>
-          <button type="button" class="btn cat-btn">Street Food</button>
-        </div>
-    </div>
+<section id="categories" class="container my-5">
+  <div>
+    <h3 class="text-center mb-4">Browse your regular food habit</h2>
+      <div class="w-80 d-flex justify-content-center align-items-center">
+        <!-- Category items will be dynamically added here -->
+        <button type="button" class="btn cat-btn">Mixed</button>
+        <button type="button" class="btn cat-btn">Breakfast</button>
+        <button type="button" class="btn cat-btn">Lunch</button>
+        <button type="button" class="btn cat-btn">Dinner</button>
+        <button type="button" class="btn cat-btn">Desert</button>
+        <button type="button" class="btn cat-btn">Street Food</button>
+      </div>
+  </div>
 
-  </section>
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 22.png'%}" class="rounded" alt="">
-          <h4 style="">Fish</h4>
-        </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 22.png'%}" class="rounded" alt="">
+        <h4 style="">Fish</h4>
+      </div>
 
-        <div class=" menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 23.png'%}" class="rounded" alt="">
-          <h4>Chicken</h4>
-        </div>
+      <div class=" menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 23.png'%}" class="rounded" alt="">
+        <h4>Chicken</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 24.png'%}" class="rounded" alt="">
-          <h4>Beef</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 24.png'%}" class="rounded" alt="">
+        <h4>Beef</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 25.png'%}" class="rounded" alt="">
-          <h4>Vegetables</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 25.png'%}" class="rounded" alt="">
+        <h4>Vegetables</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 26.png'%}" class="rounded" alt="">
-          <h4>Biriyani</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 26.png'%}" class="rounded" alt="">
+        <h4>Biriyani</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 27.png'%}" class="rounded" alt="">
-          <h4>Kabab</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 27.png'%}" class="rounded" alt="">
+        <h4>Kabab</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 28.png'%}" class="rounded" alt="">
-          <h4>Bread</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 28.png'%}" class="rounded" alt="">
+        <h4>Bread</h4>
+      </div>
 
-        <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
-          <img src="{% static 'images/Rectangle 29.png'%}" class="rounded" alt="">
-          <h4>Desert</h4>
-        </div>
+      <div class="menu col-md-3 d-flex flex-column justify-content-center align-items-center">
+        <img src="{% static 'images/Rectangle 29.png'%}" class="rounded" alt="">
+        <h4>Desert</h4>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <!-- Kitchen Cards -->
+<!-- Kitchen Cards -->
 
-  <section class="container mt-5">
-    <h3 class="mb-4 text-center" style="font-size: 36px;"><span style="color: #E32938;">Popular</span> Kitchen Near You
-    </h3>
-    <p class="text-center" style="color: #455A64;">Your go-to destination for the most delectable Bengali cuisine right in your neighborhood.</p>
-    <br>
-
-    <div class="d-flex">
-      <div class="card" style="width: 20rem; margin-right: 20px;">
-        <img src="{% static 'images/side-view-man-making.jpg'%}" height="220px" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p style="float: right;"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.8 (67) Reviews</p>
-          <h5 class="card-title mt-4">Bengali Savor</h5>
-          <small>27 Mouchak, Dhaka 1217</small>
-          <div class="d-flex justify-content-between align-items-end">
-            <div class="w-full d-flex justify-content-between">
-              <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
-              <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
-            </div>
-            <div>
-              <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-
-      <div class="card" style="width: 20rem;  margin-right: 20px;">
-        <img src="{% static 'images/healthy-homemade-meal.jpg'%}" height="220px" class="card-img-top object-fit" alt="...">
-        <div class="card-body">
-          <p style="float: right;"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.8 (97) Reviews</p>
-          <h5 class="card-title mt-4">Minus Kitchen</h5>
-          <small>27 Mouchak, Dhaka 1217</small>
-          <div class="d-flex justify-content-between align-items-end">
-            <div class="w-full d-flex justify-content-between">
-              <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
-              <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
-            </div>
-            <div>
-              <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;  margin-right: 20px;">
-        <img src="{% static 'images/view-futuristic-restaurant.jpg'%}" height="220px" class="card-img-top object-fit" alt="...">
-        <div class="card-body">
-          <p style="float: right;"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.7 (97) Reviews</p>
-          <h5 class="card-title mt-4">Friends Cafe</h5>
-          <small>27 Mouchak, Dhaka 1217</small>
-          <div class="d-flex justify-content-between align-items-end">
-            <div class="w-full d-flex justify-content-between">
-              <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
-              <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
-            </div>
-            <div>
-              <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-      <div class="card" style="width: 20rem;  margin-right: 20px;">
-        <img src="{% static 'images/mockup-cooking-blog.jpg'%}" height="220px" class="card-img-top object-fit" alt="...">
-        <div class="card-body">
-          <p style="float: right;"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.9 (97) Reviews</p>
-          <h5 class="card-title mt-4">Murcury Resturant</h5>
-          <small>34/B,2, Gulshan-1, Dhaka</small>
-          <div class="d-flex justify-content-between align-items-end">
-            <div class="w-full d-flex justify-content-between">
-              <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
-              <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
-            </div>
-            <div>
-              <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-
-    </div>
-  </section>
+<section class="container mt-5">
+  <h3 class="mb-4 text-center" style="font-size: 36px;"><span style="color: #E32938;">Popular</span> Kitchen Near You
+  </h3>
+  <p class="text-center" style="color: #455A64;">Your go-to destination for the most delectable Bengali cuisine right in
+    your neighborhood.</p>
   <br>
-  <br><br><br><br><br><br>
 
-  <!-- 
+  <div class="d-flex">
+    <div class="card" style="width: 20rem; margin-right: 20px;">
+      <img src="{% static 'images/side-view-man-making.jpg'%}" height="220px" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="d-flex justify-content-end"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.8 (67) Reviews</p>
+        <h5 class="card-title mt-2">Bengali Savor</h5>
+        <small>27 Mouchak, Dhaka 1217</small>
+        <div class="d-flex justify-content-between align-items-end">
+          <div class="w-full d-flex justify-content-between">
+            <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
+            <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
+          </div>
+          <div>
+            <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="width: 20rem;  margin-right: 20px;">
+      <img src="{% static 'images/healthy-homemade-meal.jpg'%}" height="220px" class="card-img-top object-fit"
+        alt="...">
+      <div class="card-body">
+        <p class="d-flex justify-content-end"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.8 (97) Reviews</p>
+        <h5 class="card-title mt-2">Minus Kitchen</h5>
+        <small>27 Mouchak, Dhaka 1217</small>
+        <div class="d-flex justify-content-between align-items-end">
+          <div class="w-full d-flex justify-content-between">
+            <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
+            <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
+          </div>
+          <div>
+            <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="width: 20rem;  margin-right: 20px;">
+      <img src="{% static 'images/view-futuristic-restaurant.jpg'%}" height="220px" class="card-img-top object-fit"
+        alt="...">
+      <div class="card-body">
+        <p class="d-flex justify-content-end"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.7 (97) Reviews</p>
+        <h5 class="card-title mt-2">Friends Cafe</h5>
+        <small>27 Mouchak, Dhaka 1217</small>
+        <div class="d-flex justify-content-between align-items-end">
+          <div class="w-full d-flex justify-content-between">
+            <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
+            <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
+          </div>
+          <div>
+            <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="width: 20rem;  margin-right: 20px;">
+      <img src="{% static 'images/mockup-cooking-blog.jpg'%}" height="220px" class="card-img-top object-fit" alt="...">
+      <div class="card-body">
+        <p class="d-flex justify-content-end"><i class="fa-solid fa-star" style="color: #F4CE00"></i> 4.9 (97) Reviews</p>
+        <h5 class="card-title mt-2">Murcury Resturant</h5>
+        <small>34/B,2, Gulshan-1, Dhaka</small>
+        <div class="d-flex justify-content-between align-items-end">
+          <div class="w-full d-flex justify-content-between">
+            <p class="" style="margin-right: 20px;"><i class="fa-regular fa-clock"></i> 60 Min</p>
+            <p><i class="fa-solid fa-person-biking"></i> 30 Tk</p>
+          </div>
+          <div>
+            <a href="#" class="btn"><img src="{% static '/icons/Open icon.png' %}" alt=""></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<br>
+<br><br><br><br><br><br>
+
+<!-- 
   <section id="restaurants" class="container my-5">
     <h2 class="display-6 text-left">Popular Kitchens</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -304,8 +265,6 @@
     </div>
   </section> -->
 
-  <!-- Bootstrap JS Bundle (Bootstrap JS and Popper.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<!-- Bootstrap JS Bundle (Bootstrap JS and Popper.js) -->
 
-</html>
+{% endblock %}
